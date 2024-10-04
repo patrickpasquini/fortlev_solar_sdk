@@ -14,3 +14,13 @@ class Identity:
     id: str
     name: str
     family: str
+
+
+@dataclass
+class File:
+    key: str
+    path: str
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(key=data.get("key"), path=data.get("path"))
