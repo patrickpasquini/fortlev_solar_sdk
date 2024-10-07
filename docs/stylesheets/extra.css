@@ -1,0 +1,11 @@
+:root {
+    --md-primary-fg-color: #203863;
+    --md-primary-fg-color--light: #203863;
+    --md-primary-fg-color--dark: #203863;
+}
+
+[data-md-color-accent=indigo] {
+    --md-accent-fg-color: #f1762a;
+    --md-typeset-a-color: #f1762a;
+}
+

@@ -1,0 +1,52 @@
+site_name: Fortlev Solar SDK
+site_author: Patrick Pasquini
+
+nav:
+  - Home: index.md
+  - Models:
+      - Auth: auth.md
+      - Surface: surface.md
+      - Component: component.md
+      - City: city.md
+      - Order Models:
+        - Order: order_models/order.md
+        - PvKit: order_models/pv_kit.md
+        - PvKitComponent: order_models/pv_kit_component.md
+        - StructuralInformation: order_models/structural_information.md
+        - Layout: order_models/layout.md
+  - API Reference:
+      - Fortlev Solar Client: reference/fortlev_solar_client.md
+  - Errors:
+      - Request Error: errors/request_error.md
+
+
+theme:
+  name: material
+  logo: public/logo.png
+  favicon: public/logo.png
+  palette: 
+    # Palette toggle for light mode
+    - scheme: default
+      primary: custom
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Nunito
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
+  - search
+
+extra_css:
+  - stylesheets/extra.css
