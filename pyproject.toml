@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fortlev_solar_sdk"
-version = "0.1.0"
+version = "__VERSION__"
 description = "A Python SDK for interacting with the Fortlev Solar API."
 readme = "README.md"
 license = {file = "LICENSE"}
