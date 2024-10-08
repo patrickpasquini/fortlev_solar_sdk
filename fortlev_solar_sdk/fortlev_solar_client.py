@@ -27,6 +27,7 @@ class FortlevSolarClient:
         components: Retrieves a list of available components.
         cities: Retrieves a list of cities with specific details.
         orders: Retrieves orders based on given parameters.
+        financing: Retrieves financing options based on the specified investment value.
     """
 
     BASE_URLS = {
@@ -277,6 +278,14 @@ class FortlevSolarClient:
 
         Raises:
             RequestError: If the request fails or if the API returns an error response.
+
+        Examples:
+            Authenticate and retrieve a list of financing:
+
+            >>> client = FortlevSolarClient()
+            >>> client.authenticate(username="username", pwd="password")
+            >>> financing = client.financing(value=15000, entry_value=5000, grace=3)
+
         """
         _json = {"investment_value": value, "entry_value": entry_value, "grace": grace}
         response = requests.post(
