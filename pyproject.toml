@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fortlev_solar_sdk"
+version = "0.1.0"
+description = "A Python SDK for interacting with the Fortlev Solar API."
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.6"
+authors = [
+    {name = "Patrick Pasquini", email = "contatopasquini@gmail.com"},
+]
+maintainers = [
+    {name = "Patrick Pasquini", email = "contatopasquini@gmail.com"},
+]
+keywords = ["solar", "API", "SDK", "Fortlev"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Clients",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+    "requests",
+]
+
+[project.optional-dependencies]
+testing = [
+    "pytest", "python-dotenv",
+]
+
+[project.urls]
+Repository = "https://github.com/patrickpasquini/fortlev_solar_sdk"
