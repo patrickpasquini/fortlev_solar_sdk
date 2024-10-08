@@ -1,0 +1,40 @@
+name: Update PyPI
+
+on:
+  release:
+    types: [published]
+
+
+jobs:
+  pypi:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11.x'
+
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip build twine requests
+
+    - name: Update pyproject.toml
+      run: |
+        python pyproject.py
+      if: ${{ success() }}
+
+    - name: Building version
+      run: |
+        python3 -m build
+      if: ${{ success() }}
+
+    - name: Send to PyPI
+      run: |
+        twine upload dist/*
+      if: ${{ success() }}
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
