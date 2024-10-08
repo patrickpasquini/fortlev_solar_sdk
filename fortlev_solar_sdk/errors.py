@@ -8,8 +8,11 @@ class BaseError(Exception):
     """
 
     def __init__(self, status_code: int, error_message: str) -> None:
-        self.status_code = status_code
         self.error_message = error_message
+        self.status_code = status_code
+
+    def __str__(self):
+        return f"Error {self.status_code}. {self.error_message}"
 
 
 class RequestError(BaseError):
@@ -24,6 +27,8 @@ class RequestError(BaseError):
         error_message (str): A descriptive message explaining the request error.
     """
 
-    def __init__(self):
-        message = f"{self.error_message}. Request error: {self.status_code}"
-        super().__init__(message)
+    def __init__(self, error_message: str, status_code: int) -> None:
+        super().__init__(status_code=status_code, error_message=error_message)
+
+    def __str__(self):
+        return f"Request Error {self.status_code}. {self.error_message}"
