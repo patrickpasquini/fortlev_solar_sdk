@@ -4,7 +4,7 @@ import requests
 project_toml = Path("pyproject.toml")
 
 git_hub_latest_release_url = (
-    "https://github.com/patrickpasquini/fortlev_solar_sdk/releases/latest"
+    "https://api.github.com/repos/patrickpasquini/fortlev_solar_sdk/releases/latest"
 )
 response = requests.get(url=git_hub_latest_release_url)
 VERSION = response.json()["tag_name"]
