@@ -3,8 +3,6 @@
 
 This SDK is designed to simplify the process of interacting with the Fortlev Solar API.
 
-## Documentation
-
 **Go to:** [Docs](https://patrickpasquini.github.io/fortlev_solar_sdk/)
 
 ### Installation
