@@ -1,18 +1,11 @@
 
 # Fortlev Solar SDK Documentation
 
-Welcome to documentation for the **Fortlev Solar SDK**. This SDK is designed to simplify the process of interacting with the Fortlev Solar API.
+This SDK is designed to simplify the process of interacting with the Fortlev Solar API.
 
-## Getting Started
+## Documentation
 
-The Fortlev Solar SDK provides easy-to-use methods for:
-
-- **Register**: Register a new partner in the Fortlev Solar
-- **Authentication**: Authenticate users and generate access token.
-- **Surfaces**: Retrieve available surfaces for photovoltaic installations.
-- **Components**: Access data for various solar components.
-- **Cities**: Get a list of cities with available data.
-- **Orders**: Create orders based on specific power, voltage, and phase parameters.
+**Go to:** [Docs](https://patrickpasquini.github.io/fortlev_solar_sdk/)
 
 ### Installation
 
