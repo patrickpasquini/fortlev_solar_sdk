@@ -12,8 +12,7 @@ def test_create_orders(client: FortlevSolarClient):
     - The returned objects are of type `Order`.
 
     Args:
-        client (FortlevSolarClient): The authenticated client fixture used to interact
-        with the Fortlev Solar API.
+        client (FortlevSolarClient): An instance of the FortlevSolarClient.
     """
     orders = client.orders()
     assert len(orders) > 1

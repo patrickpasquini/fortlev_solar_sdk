@@ -13,8 +13,7 @@ def test_get_components(client: FortlevSolarClient):
       number of components is returned based on the specified page size.
 
     Args:
-        client (FortlevSolarClient): The authenticated client fixture used to interact with
-        the Fortlev Solar API.
+        client (FortlevSolarClient): An instance of the FortlevSolarClient.
     """
     components = client.components()
     assert len(components) == 10

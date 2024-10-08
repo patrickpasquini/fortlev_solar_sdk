@@ -10,8 +10,7 @@ def test_get_surfaces(client: FortlevSolarClient):
     It checks that when the method is called, it returns exactly 10 `Surface` objects.
 
     Args:
-        client (FortlevSolarClient): The authenticated client fixture used to interact with
-        the Fortlev Solar API.
+        client (FortlevSolarClient): An instance of the FortlevSolarClient.
     """
     surfaces = client.surfaces()
     assert len(surfaces) == 10
