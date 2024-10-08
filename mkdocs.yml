@@ -14,10 +14,10 @@ nav:
       - PvKitComponent: models/pv_kit_component.md
       - StructuralInformation: models/structural_information.md
       - Layout: models/layout.md
-  - API Reference:
-      - Fortlev Solar Client: reference/fortlev_solar_client.md
+  - APIReference:
+      - FortlevSolarClient: reference/fortlev_solar_client.md
   - Errors:
-      - Request Error: errors/request_error.md
+      - RequestError: errors/request_error.md
 
 
 theme:
