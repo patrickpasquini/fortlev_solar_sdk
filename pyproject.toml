@@ -23,8 +23,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Utilities",
-    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-    "Topic :: Internet :: WWW/HTTP :: HTTP Clients",
+    "Topic :: Internet :: WWW/HTTP",
     "Topic :: Scientific/Engineering :: Information Analysis",
     "Topic :: Software Development :: Libraries",
 ]
