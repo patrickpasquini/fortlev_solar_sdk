@@ -13,6 +13,7 @@ The Fortlev Solar SDK provides easy-to-use methods for:
 - **Components**: Access data for various solar components.
 - **Cities**: Get a list of cities with available data.
 - **Orders**: Create orders based on specific power, voltage, and phase parameters.
+- **Financing**: Retrieves financing options based on the specified investment value.
 
 ### Installation
 

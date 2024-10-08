@@ -4,6 +4,7 @@ from .component import Component
 from .city import City
 from .errors import RequestError
 from .order import Order
+from .financing import Financing
 from .responses import RegisterResponse
 import requests
 from typing import Literal
@@ -26,6 +27,7 @@ class FortlevSolarClient:
         components: Retrieves a list of available components.
         cities: Retrieves a list of cities with specific details.
         orders: Retrieves orders based on given parameters.
+        financing: Retrieves financing options based on the specified investment value.
     """
 
     BASE_URLS = {
@@ -45,6 +47,8 @@ class FortlevSolarClient:
     ) -> RegisterResponse:
         """Register a new partner in Fortlev Solar.
 
+        This method sends a request to [POST] /user/sign-up
+
         Args:
             name (str): The name of the user to be registered.
             email (str): The email address of the user. Must be a valid email format.
@@ -59,14 +63,14 @@ class FortlevSolarClient:
             RequestError: If the registration request fails or if the server returns an error response.
         """
         url = f"{self.base_url}/user/sign-up"
-        form_body = {
+        _json = {
             "name": name,
             "email": email,
             "phone_number": phone_number,
             "cnpj": cnpj,
             "password": pwd,
         }
-        response = requests.post(url=url, json=form_body)
+        response = requests.post(url=url, json=_json)
         if response.status_code == 200:
             is_valid = response.json().get("email", {}).get("status")
             message = response.json().get("message", "Unknown message")
@@ -79,6 +83,8 @@ class FortlevSolarClient:
     def authenticate(self, username: str, pwd: str) -> Auth:
         """
         Authenticates the client with the provided username and password.
+
+        This method sends a request to [POST] /user/login
 
         Args:
             username (str): The username for authentication.
@@ -152,6 +158,8 @@ class FortlevSolarClient:
         """
         Retrieves a list of available surfaces.
 
+        This method sends a request to [GET] /surface
+
         Args:
             query_params (dict, Optional): Optional query parameters for filtering the surfaces.
 
@@ -166,6 +174,8 @@ class FortlevSolarClient:
         """
         Retrieves a list of available components.
 
+        This method sends a request to [GET] /component/all
+
         Args:
             query_params (dict, Optional): Optional query parameters for filtering the components.
 
@@ -179,6 +189,8 @@ class FortlevSolarClient:
     def cities(self, query_params: dict = {}) -> list[City]:
         """
         Retrieves a list of cities with specific details.
+
+        This method sends a request to [GET] /brazilian-city
 
         Args:
             query_params (dict, Optional): Optional query parameters for filtering the cities.
@@ -199,6 +211,8 @@ class FortlevSolarClient:
         city: str = None,
     ) -> list[Order]:
         """Retrieves a list of orders based on the given parameters.
+
+        This method sends a request to [POST] /order
 
         Args:
             power (float, Optional): The target power for the order. Defaults to 0.
@@ -225,7 +239,7 @@ class FortlevSolarClient:
 
         """
         self._check_auth()
-        payload = {
+        _json = {
             "target_power": power,
             "voltage": voltage,
             "phase": phase,
@@ -235,10 +249,52 @@ class FortlevSolarClient:
         response = requests.post(
             url=f"{self.base_url}/{self._auth.scope}/order",
             headers=self._headers,
-            json=payload,
+            json=_json,
         )
         if response.status_code == 200:
             return [Order.from_dict(order) for order in response.json()]
+        raise RequestError(
+            status_code=response.status_code,
+            error_message=response.json().get("detail", "Unknown error"),
+        )
+
+    def financing(
+        self,
+        value: float,
+        entry_value: float = 0,
+        grace: Literal[1, 2, 3, 4, 5, 6] = 1,
+    ) -> list[Financing]:
+        """Retrieves financing options based on the specified investment value.
+
+        This method sends a request to [POST] /financing/simplified
+
+        Args:
+            value (float): The total investment value.
+            entry_value (float, optional): The upfront entry value. Defaults to 0.
+            grace (Literal[1, 2, 3, 4, 5, 6], optional): The number of grace months before starting payments. Defaults to 1.
+
+        Returns:
+            list[Financing]: A list of Financing instances representing the available financing options.
+
+        Raises:
+            RequestError: If the request fails or if the API returns an error response.
+
+        Examples:
+            Authenticate and retrieve a list of financing:
+
+            >>> client = FortlevSolarClient()
+            >>> client.authenticate(username="username", pwd="password")
+            >>> financing = client.financing(value=15000, entry_value=5000, grace=3)
+
+        """
+        _json = {"investment_value": value, "entry_value": entry_value, "grace": grace}
+        response = requests.post(
+            url=f"{self.base_url}/{self._auth.scope}/financing/simplified",
+            headers=self._headers,
+            json=_json,
+        )
+        if response.status_code == 200:
+            return [Financing.from_dict(financing) for financing in response.json()]
         raise RequestError(
             status_code=response.status_code,
             error_message=response.json().get("detail", "Unknown error"),

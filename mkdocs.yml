@@ -4,16 +4,16 @@ site_author: Patrick Pasquini
 nav:
   - Home: index.md
   - Models:
-      - Auth: auth.md
-      - Surface: surface.md
-      - Component: component.md
-      - City: city.md
-      - Order Models:
-        - Order: order_models/order.md
-        - PvKit: order_models/pv_kit.md
-        - PvKitComponent: order_models/pv_kit_component.md
-        - StructuralInformation: order_models/structural_information.md
-        - Layout: order_models/layout.md
+      - Auth: models/auth.md
+      - Surface: models/surface.md
+      - Component: models/component.md
+      - City: models/city.md
+      - Financing: models/financing.md
+      - Order: models/order.md
+      - PvKit: models/pv_kit.md
+      - PvKitComponent: models/pv_kit_component.md
+      - StructuralInformation: models/structural_information.md
+      - Layout: models/layout.md
   - API Reference:
       - Fortlev Solar Client: reference/fortlev_solar_client.md
   - Errors:

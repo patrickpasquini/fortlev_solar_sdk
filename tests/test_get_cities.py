@@ -13,8 +13,7 @@ def test_get_components(client: FortlevSolarClient):
       matching the filter is returned.
 
     Args:
-        client (FortlevSolarClient): The authenticated client fixture used to interact with
-        the Fortlev Solar API.
+        client (FortlevSolarClient): An instance of the FortlevSolarClient.
     """
     cities = client.cities()
     assert len(cities) == 10
