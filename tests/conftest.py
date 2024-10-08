@@ -21,6 +21,6 @@ def client():
     Returns:
         FortlevSolarClient: An authenticated instance of the client.
     """
-    client = FortlevSolarClient()
+    client = FortlevSolarClient(env="DEV")
     client.authenticate(username=USERNAME, pwd=PWD)
     return client

@@ -4,6 +4,7 @@ from .component import Component
 from .city import City
 from .errors import RequestError
 from .order import Order
+from .responses import RegisterResponse
 import requests
 from typing import Literal
 
@@ -19,6 +20,7 @@ class FortlevSolarClient:
         _headers (dict): Headers to include in authenticated requests.
 
     Methods:
+        register: Register a new partner in the Fortlev Solar
         authenticate: Authenticates the user and sets authorization headers.
         surfaces: Retrieves a list of available surfaces.
         components: Retrieves a list of available components.
@@ -26,11 +28,53 @@ class FortlevSolarClient:
         orders: Retrieves orders based on given parameters.
     """
 
-    base_url = "https://api-platform.fortlevsolar.app"
+    BASE_URLS = {
+        "DEV": "https://homolog-api.fortlevsolar.app",
+        "PROD": "https://api-platform.fortlevsolar.app",
+    }
 
-    def __init__(self) -> None:
+    def __init__(self, env: Literal["DEV", "PROD"] = "PROD") -> None:
+        if env not in self.BASE_URLS:
+            raise ValueError(f"Invalid environment: {env}. Use 'PROD' or 'DEV'.")
+        self.base_url = self.BASE_URLS[env]
         self._auth = None
         self._headers = None
+
+    def register(
+        self, name: str, email: str, phone_number: str, cnpj: str, pwd: str
+    ) -> RegisterResponse:
+        """Register a new partner in Fortlev Solar.
+
+        Args:
+            name (str): The name of the user to be registered.
+            email (str): The email address of the user. Must be a valid email format.
+            phone_number (str): The user's phone number. Must contain 11 digits.
+            cnpj (str): The CNPJ number of the user or company. Must follow CNPJ formatting rules.
+            pwd (str): The password for the user's account. Must meet specified complexity requirements.
+
+        Returns:
+            SignUpResponse: An instance containing a message and the validation status of the email.
+
+        Raises:
+            RequestError: If the registration request fails or if the server returns an error response.
+        """
+        url = f"{self.base_url}/user/sign-up"
+        form_body = {
+            "name": name,
+            "email": email,
+            "phone_number": phone_number,
+            "cnpj": cnpj,
+            "password": pwd,
+        }
+        response = requests.post(url=url, json=form_body)
+        if response.status_code == 200:
+            is_valid = response.json().get("email", {}).get("status")
+            message = response.json().get("message", "Unknown message")
+            return RegisterResponse(message=message, is_valid=is_valid)
+        raise RequestError(
+            status_code=response.status_code,
+            error_message=response.json().get("detail", "Unknown error"),
+        )
 
     def authenticate(self, username: str, pwd: str) -> Auth:
         """
@@ -76,7 +120,7 @@ class FortlevSolarClient:
                 error_message="User is not authenticated. Please call authenticate().",
             )
 
-    def base_request(
+    def base_get_request(
         self, endpoint: str, Model, query_params: dict = {}
     ) -> list[object]:
         """
@@ -114,7 +158,7 @@ class FortlevSolarClient:
         Returns:
             list[Surface]: A list of Surface instances.
         """
-        return self.base_request(
+        return self.base_get_request(
             endpoint="surface", Model=Surface, query_params=query_params
         )
 
@@ -128,7 +172,7 @@ class FortlevSolarClient:
         Returns:
             list[Component]: A list of Component instances.
         """
-        return self.base_request(
+        return self.base_get_request(
             endpoint="component/all", Model=Component, query_params=query_params
         )
 
@@ -142,7 +186,7 @@ class FortlevSolarClient:
         Returns:
             list[City]: A list of City instances.
         """
-        return self.base_request(
+        return self.base_get_request(
             endpoint="brazilian-city", Model=City, query_params=query_params
         )
 
