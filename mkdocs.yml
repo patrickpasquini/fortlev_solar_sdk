@@ -1,8 +1,11 @@
 site_name: Fortlev Solar SDK
+site_url: https://patrickpasquini.github.io/fortlev_solar_sdk/
 site_author: Patrick Pasquini
 
 nav:
-  - Home: index.md
+  - Get Started: index.md
+  - API Reference:
+      - FortlevSolarClient: reference/fortlev_solar_client.md
   - Models:
       - Auth: models/auth.md
       - Surface: models/surface.md
@@ -14,8 +17,6 @@ nav:
       - PvKitComponent: models/pv_kit_component.md
       - StructuralInformation: models/structural_information.md
       - Layout: models/layout.md
-  - APIReference:
-      - FortlevSolarClient: reference/fortlev_solar_client.md
   - Errors:
       - RequestError: errors/request_error.md
 
@@ -39,6 +40,16 @@ theme:
         name: Switch to light mode
   font:
     text: Nunito
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
 
 plugins:
   - mkdocstrings:
@@ -47,6 +58,31 @@ plugins:
           options:
             show_source: false
   - search
+  - social
 
 extra_css:
   - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/patrickpasquini/
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/patrick-pasquini/
+
+copyright: |
+  &copy; 2024 <a href="https://github.com/patrickpasquini/"  target="_blank" rel="noopener">Patrick Pasquini</a>
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
