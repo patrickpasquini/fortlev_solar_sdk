@@ -1,21 +1,9 @@
 
 # Fortlev Solar SDK Documentation
 
-Welcome to documentation for the **Fortlev Solar SDK**. This SDK is designed to simplify the process of interacting with the Fortlev Solar API.
+Welcome to the **Fortlev Solar SDK** Documentation. This library is designed to simplify integration with Fortlev Solar **APIs**.
 
-## Getting Started
-
-The Fortlev Solar SDK provides easy-to-use methods for:
-
-- **Register**: Register a new partner in the Fortlev Solar
-- **Authentication**: Authenticate users and generate access token.
-- **Surfaces**: Retrieve available surfaces for photovoltaic installations.
-- **Components**: Access data for various solar components.
-- **Cities**: Get a list of cities with available data.
-- **Orders**: Create orders based on specific power, voltage, and phase parameters.
-- **Financing**: Retrieves financing options based on the specified investment value.
-
-### Installation
+## Installation
 
 You can install the SDK using pip:
 
@@ -23,21 +11,42 @@ You can install the SDK using pip:
 pip install fortlev_solar_sdk
 ```
 
-### Quick Example
+## Getting Started
 
-Here's a quick example of how to use the SDK to authenticate and create orders:
+### Authenticate
 
-```python
+First, you need to `authenticate`. Once authenticated, the token will be stored in the client, allowing you to access all the methods that require authentication.
+
+```py
 from fortlev_solar_sdk import FortlevSolarClient
 
 client = FortlevSolarClient()
-client.authenticate(username="username", pwd="password")
-orders = client.orders(power=5.0, voltage="220", phase=1, surface="surface_id", city="city_id")
-for order in orders:
-    print(order)
+client.authenticate(username="john@doe.com", pwd="Mypassword123@")
 ```
 
+If you don't have an account, you can use the `register` method to create one:
+
+```py
+client.register(name="John Doe", email="john@doe.com", phone_number="51924979815", cnpj="36528955000163", pwd="Mypassword123@")
+```
+
+### Available Features
+
+Once you're set up, you can:
+
+- **Create Orders**: Seamlessly create orders, fully integrated with Fortlev Solar's inventory.
+```py
+orders = client.orders(power=12, voltage="220", phase=1)
+```
+- **Simulate Financing Installments**: Run simulations for the financing installments of your photovoltaic kit.
+```py
+financing = client.financing(value=10000)
+```
+
+To explore all the available methods and their usage [Click here](reference/fortlev_solar_client)
+
 ## API Reference
+
 
 For a complete reference of available endpoints, visit the official API documentation:
 
