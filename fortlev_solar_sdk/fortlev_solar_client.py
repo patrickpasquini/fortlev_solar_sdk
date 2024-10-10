@@ -6,9 +6,9 @@ from .errors import RequestError
 from .order import Order
 from .financing import Financing
 from .responses import RegisterResponse
-import requests
 from typing import Literal
-
+import requests
+import os
 
 class FortlevSolarClient:
     """
@@ -17,8 +17,6 @@ class FortlevSolarClient:
 
     Attributes:
         base_url (str): The base URL of the Fortlev Solar API.
-        _auth (Auth): Stores authentication details after logging in.
-        _headers (dict): Headers to include in authenticated requests.
 
     Methods:
         register: Register a new partner in the Fortlev Solar
@@ -39,6 +37,8 @@ class FortlevSolarClient:
         if env not in self.BASE_URLS:
             raise ValueError(f"Invalid environment: {env}. Use 'PROD' or 'DEV'.")
         self.base_url = self.BASE_URLS[env]
+        self._username = os.getenv("FORTLEV_SOLAR_USERNAME")
+        self._password = os.getenv("FORTLEV_SOLAR_PWD")
         self._auth = None
         self._headers = None
 
@@ -107,6 +107,8 @@ class FortlevSolarClient:
             )
             token = f"{self._auth.token_type} {self._auth.access_token}"
             self._headers = {"Authorization": token}
+            self._username = username
+            self._password = pwd
             return self._auth
         raise RequestError(
             status_code=response.status_code,
@@ -116,15 +118,18 @@ class FortlevSolarClient:
     def _check_auth(self) -> None:
         """
         Checks if the client is authenticated. Raises an error if not authenticated.
+        Additionally, it verifies if the token has expired and renews it if necessary.
 
         Raises:
             RequestError: If the client is not authenticated.
         """
-        if not self._auth:
+        if self._auth is None:
             raise RequestError(
                 status_code=401,
                 error_message="User is not authenticated. Please call authenticate().",
             )
+        if self._auth.is_expired():
+            self.authenticate(username=self._username, pwd=self._password)
 
     def base_get_request(
         self, endpoint: str, Model, query_params: dict = {}
