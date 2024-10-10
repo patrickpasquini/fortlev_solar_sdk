@@ -2,54 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/errors/request_error/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/models/auth/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/models/city/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/models/component/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/models/financing/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/models/layout/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/models/order/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/models/pv_kit/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/models/pv_kit_component/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/models/structural_information/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/models/surface/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
     <url>
          <loc>https://patrickpasquini.github.io/fortlev_solar_sdk/reference/fortlev_solar_client/</loc>
-         <lastmod>2024-10-09</lastmod>
+         <lastmod>2024-10-10</lastmod>
     </url>
 </urlset>
