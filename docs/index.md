@@ -17,12 +17,19 @@ pip install fortlev_solar_sdk
 
 First, you need to `authenticate`. Once authenticated, the token will be stored in the client, allowing you to access all the methods that require authentication.
 
+
 ```py
 from fortlev_solar_sdk import FortlevSolarClient
 
 client = FortlevSolarClient()
 client.authenticate(username="john@doe.com", pwd="Mypassword123@")
 ```
+
+???+ note 
+    You can set the username and password in your `.env` file, use `FORTLEV_SOLAR_USERNAME` and `FORTLEV_SOLAR_PWD`
+
+???+ warning
+    It is recommended to use the `FortlevSolarClient(env="DEV")` in development mode during the development phase
 
 If you don't have an account, you can use the `register` method to create one:
 
@@ -43,7 +50,8 @@ orders = client.orders(power=12, voltage="220", phase=1)
 financing = client.financing(value=10000)
 ```
 
-To explore all the available methods and their usage [Click here](reference/fortlev_solar_client)
+
+To explore all the available methods and their usage [Click here](reference/fortlev_solar_client.md)
 
 ## API Reference
 
