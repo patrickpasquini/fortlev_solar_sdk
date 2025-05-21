@@ -13,6 +13,7 @@ class City:
         isopleth (int): The isopleth value indicating a specific attribute of the city.
         latitude (float): The latitude coordinate of the city.
         longitude (float): The longitude coordinate of the city.
+        distribution_center (str) : The distribuiton center that serves the city
     """
 
     id: str
@@ -21,6 +22,7 @@ class City:
     isopleth: int
     latitude: float
     longitude: float
+    distribution_center: str
 
     @classmethod
     def from_dict(cls, data: dict) -> "City":
@@ -40,4 +42,5 @@ class City:
             isopleth=data.get("isopleth"),
             latitude=data.get("latitude"),
             longitude=data.get("longitude"),
+            distribution_center=data.get("distribution_center"),
         )

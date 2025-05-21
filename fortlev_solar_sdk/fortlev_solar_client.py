@@ -10,6 +10,7 @@ from typing import Literal
 import requests
 import os
 
+
 class FortlevSolarClient:
     """
     Client for interacting with the Fortlev Solar API. Provides methods for authentication
@@ -29,8 +30,8 @@ class FortlevSolarClient:
     """
 
     BASE_URLS = {
-        "DEV": "https://homolog-api.fortlevsolar.app",
-        "PROD": "https://api-platform.fortlevsolar.app",
+        "DEV": "https://homolog.fortlevsolar.app/api",
+        "PROD": "https://fortlevsolar.app/api",
     }
 
     def __init__(self, env: Literal["DEV", "PROD"] = "PROD") -> None:
@@ -172,7 +173,7 @@ class FortlevSolarClient:
             list[Surface]: A list of Surface instances.
         """
         return self.base_get_request(
-            endpoint="surface", Model=Surface, query_params=query_params
+            endpoint="surface/", Model=Surface, query_params=query_params
         )
 
     def components(self, query_params: dict = {}) -> list[Component]:
@@ -204,7 +205,7 @@ class FortlevSolarClient:
             list[City]: A list of City instances.
         """
         return self.base_get_request(
-            endpoint="brazilian-city", Model=City, query_params=query_params
+            endpoint="brazilian-city/", Model=City, query_params=query_params
         )
 
     def orders(
@@ -252,7 +253,7 @@ class FortlevSolarClient:
             "brazilian_city": city,
         }
         response = requests.post(
-            url=f"{self.base_url}/{self._auth.scope}/order",
+            url=f"{self.base_url}/{self._auth.scope}/order/",
             headers=self._headers,
             json=_json,
         )
